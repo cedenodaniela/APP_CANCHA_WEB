@@ -17,9 +17,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
-          cache: npm
 
-      - run: npm ci
+      # package-lock.json no se versiona (.gitignore), así que se usa npm install y no npm ci.
+      - run: npm install
       - run: npm run lint
       - run: npm test -- --watch=false
       - run: npm run build
