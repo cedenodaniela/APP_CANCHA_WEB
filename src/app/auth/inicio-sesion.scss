@@ -1,0 +1,166 @@
+// Pantalla 12. En computadora: marca en verde a la izquierda y formulario a la derecha.
+// En tablet (desde 768 px, RNF-11): franja verde arriba y tarjeta montada encima,
+// el mismo diseño de la pantalla de acceso de la app Android.
+
+:host {
+  display: block;
+  min-height: 100%;
+}
+
+.acceso {
+  display: grid;
+  grid-template-columns: minmax(360px, 5fr) 7fr;
+  min-height: 100vh;
+}
+
+.marca {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+  background: var(--cw-verde);
+  color: #fff;
+}
+
+.marca__contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: auto 0;
+}
+
+.marca__logo {
+  width: min(280px, 100%);
+  height: auto;
+  padding: 12px 16px;
+  border-radius: 20px;
+  background: var(--cw-superficie);
+  box-sizing: border-box;
+}
+
+.marca__complejo {
+  margin: 8px 0 0;
+  font: var(--mat-sys-headline-small);
+  font-weight: 700;
+}
+
+.marca__descripcion {
+  max-width: 36ch;
+  margin: 0;
+  font: var(--mat-sys-body-large);
+  opacity: 0.92;
+}
+
+.marca__lema {
+  margin: 0;
+  font: var(--mat-sys-label-large);
+  letter-spacing: 0.04em;
+}
+
+.formulario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 440px;
+  padding: 32px 28px;
+  border: 1px solid var(--cw-borde);
+  border-radius: 20px;
+  background: var(--cw-superficie);
+  box-shadow: 0 6px 24px rgb(15 107 62 / 8%);
+  box-sizing: border-box;
+}
+
+.tarjeta__encabezado {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  h1 {
+    margin: 0;
+    font: var(--mat-sys-headline-medium);
+    font-weight: 700;
+    color: var(--cw-texto);
+  }
+}
+
+.tarjeta__etiqueta {
+  margin: 0;
+  font: var(--mat-sys-label-large);
+  color: var(--cw-verde);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.tarjeta__subtitulo,
+.tarjeta__nota {
+  margin: 0;
+  font: var(--mat-sys-body-large);
+  color: var(--cw-texto-suave);
+}
+
+.tarjeta__nota {
+  font: var(--mat-sys-body-medium);
+  text-align: center;
+  color: var(--cw-texto-suave);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.ingresar {
+  min-height: 48px;
+  margin-top: 8px;
+  font-weight: 600;
+
+  mat-spinner {
+    display: inline-block;
+    margin-right: 8px;
+    vertical-align: middle;
+    --mat-progress-spinner-active-indicator-color: currentColor;
+  }
+}
+
+@media (max-width: 1023px) {
+  .acceso {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .marca {
+    align-items: center;
+    padding: 32px 24px 80px;
+    border-radius: 0 0 32px 32px;
+    text-align: center;
+  }
+
+  .marca__contenido {
+    align-items: center;
+    gap: 8px;
+  }
+
+  .marca__descripcion,
+  .marca__lema {
+    display: none;
+  }
+
+  .formulario {
+    align-items: flex-start;
+    margin-top: -64px;
+    padding-top: 0;
+  }
+}
