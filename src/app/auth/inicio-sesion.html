@@ -1,0 +1,90 @@
+<main class="acceso">
+  <section class="marca" aria-label="CanchApp">
+    <div class="marca__contenido">
+      <img
+        class="marca__logo"
+        src="logo_canchapp.jpg"
+        alt="CanchApp: reserva, juega, disfruta"
+        width="780"
+        height="520"
+      />
+      <p class="marca__complejo">Complejo Deportivo Calceta</p>
+      <p class="marca__descripcion">
+        Agenda, comprobantes, canchas y reportes del complejo, desde la computadora.
+      </p>
+    </div>
+    <p class="marca__lema">Reserva · Juega · Disfruta</p>
+  </section>
+
+  <section class="formulario">
+    <div class="tarjeta">
+      <header class="tarjeta__encabezado">
+        <p class="tarjeta__etiqueta">Panel de administración</p>
+        <h1>Inicia sesión</h1>
+        <p class="tarjeta__subtitulo">Usa tu cuenta de administrador de CanchApp.</p>
+      </header>
+
+      @if (error(); as mensaje) {
+        <cw-aviso [texto]="mensaje" />
+      }
+
+      <form [formGroup]="formulario" (ngSubmit)="ingresar()" novalidate>
+        <mat-form-field appearance="outline">
+          <mat-label>Correo electrónico</mat-label>
+          <mat-icon matPrefix aria-hidden="true">mail</mat-icon>
+          <input
+            matInput
+            formControlName="email"
+            type="email"
+            autocomplete="username"
+            inputmode="email"
+            placeholder="tucorreo@ejemplo.com"
+            data-prueba="correo"
+          />
+          @if (formulario.controls.email.invalid) {
+            <mat-error>Ingresa un correo válido.</mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
+          <mat-icon matPrefix aria-hidden="true">lock</mat-icon>
+          <input
+            matInput
+            formControlName="password"
+            [type]="passwordVisible() ? 'text' : 'password'"
+            autocomplete="current-password"
+            data-prueba="contrasena"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            [attr.aria-label]="passwordVisible() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+            [attr.aria-pressed]="passwordVisible()"
+            [disabled]="cargando()"
+            (click)="alternarPassword()"
+          >
+            <mat-icon aria-hidden="true">{{ passwordVisible() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (formulario.controls.password.invalid) {
+            <mat-error>Ingresa tu contraseña.</mat-error>
+          }
+        </mat-form-field>
+
+        <button mat-flat-button class="ingresar" type="submit" [disabled]="cargando()" data-prueba="ingresar">
+          @if (cargando()) {
+            <mat-spinner diameter="20" aria-hidden="true" />
+            Ingresando…
+          } @else {
+            Ingresar
+          }
+        </button>
+      </form>
+
+      <p class="tarjeta__nota">
+        ¿Eres cliente? Reserva desde la app CanchApp en tu celular.
+      </p>
+    </div>
+  </section>
+</main>

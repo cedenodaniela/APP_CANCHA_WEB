@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main, calidad, desarrollo]
+  pull_request:
+    branches: [main, calidad, desarrollo]
+
+jobs:
+  web:
+    name: Lint, pruebas y compilación
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # package-lock.json no se versiona (.gitignore), así que se usa npm install y no npm ci.
+      - run: npm install
+      - run: npm run lint
+      - run: npm test -- --watch=false
+      - run: npm run build
+
+      # Cuando el backend publique el openapi.json, aquí se valida el contrato
+      # de la API (app_cancha/AGENTS.md §4 y §12).

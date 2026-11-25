@@ -1,0 +1,56 @@
+// Tema del panel: Material 3 con la paleta institucional (app_cancha/AGENTS.md §6).
+// Las paletas de _theme-colors.scss salen de ng generate @angular/material:theme-color
+// con el verde #0F6B3E, el azul #1D5FA8 y el rojo #B42318.
+@use '@angular/material' as mat;
+@use './styles/theme-colors' as colores;
+
+// Colores exactos de la paleta, iguales a los de la app Android (ui/theme/Color.kt),
+// para que un estado se vea igual en los dos clientes.
+:root {
+  --cw-verde: #0f6b3e;
+  --cw-azul: #1d5fa8;
+  --cw-naranja: #b4541a;
+  --cw-rojo: #b42318;
+  --cw-fondo: #f4f6f1;
+  --cw-superficie: #ffffff;
+  --cw-borde: #d5dccf;
+  --cw-texto: #1c2521;
+  --cw-texto-suave: #4d5a52;
+  --cw-fondo-error: #fdecea;
+  --cw-fondo-exito: #e7f3ec;
+}
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: colores.$primary-palette,
+        tertiary: colores.$tertiary-palette,
+        theme-type: light,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+
+  // El verde institucional exacto en botones y foco, no el tono generado de la paleta.
+  @include mat.theme-overrides(
+    (
+      primary: var(--cw-verde),
+      error: var(--cw-rojo),
+      surface: var(--cw-superficie),
+      on-surface: var(--cw-texto),
+      on-surface-variant: var(--cw-texto-suave),
+    )
+  );
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--cw-fondo);
+  color: var(--cw-texto);
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+}
